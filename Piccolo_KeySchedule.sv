@@ -16,7 +16,6 @@ module Piccolo_KeySchedule(
     assign wk3 = imode ? {K7[15:8], K4[7:0]} : {K1[15:8], K0[7:0]};
 
     wire [2:0] state_idx = (iround + 5'd1) >> 2; 
-    
     reg [127:0] pKS;
     always @(*) begin
         case (state_idx)
@@ -28,6 +27,7 @@ module Piccolo_KeySchedule(
             3'd5: pKS = {K2, K1, K6, K5, K0, K7, K4, K3};
             3'd6: pKS = {K6, K1, K4, K3, K2, K5, K0, K7};
             3'd7: pKS = {K4, K1, K0, K7, K6, K3, K2, K5};
+         default: pKS = {K0, K1, K2, K3, K4, K5, K6, K7};
         endcase
     end
     
